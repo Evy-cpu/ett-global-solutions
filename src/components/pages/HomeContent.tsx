@@ -83,8 +83,10 @@ export function HomeContent() {
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <LiveBadge label={t("Équipes en ligne 24/7", "Teams online 24/7")} />
-              <span className="flex items-center gap-1.5 text-xl" aria-label="Pays couverts">
-                🇫🇷 🇧🇪 🇨🇦 🇬🇧 🇺🇸 🇨🇲
+              <span className="flex items-center gap-1.5" aria-label="Pays couverts">
+                {["🇫🇷","🇧🇪","🇨🇦","🇬🇧","🇺🇸","🇨🇲"].map((flag, i) => (
+                  <img key={i} src={`https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/${[...flag].map(c => c.codePointAt(0)?.toString(16)).join("-")}.png`} alt="" className="h-5 w-5" />
+                ))}
               </span>
             </div>
              <div className="mt-8 grid max-w-lg grid-cols-2 gap-4 sm:grid-cols-4">
