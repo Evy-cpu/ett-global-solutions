@@ -115,22 +115,28 @@ export function Header() {
             exit={{ opacity: 0, y: -10 }}
             className="ett-mobile-menu border-b border-white/5 bg-ett-dark/98 px-6 py-5 backdrop-blur-xl lg:hidden"
           >
-            <nav className="flex flex-col gap-4" aria-label="Mobile">
-              {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="ett-nav-link font-mont text-sm font-semibold text-[#9fb2c8] hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Link href="/devis" onClick={() => setOpen(false)}>
-                <Button size="sm" className="mt-2 w-full">
-                  {t("DEMANDE DE DEVIS", "GET A QUOTE")}
-                </Button>
-              </Link>
+            <nav className="flex flex-col gap-2" aria-label="Mobile">
+              {nav.map((item) => {
+                const active =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "ett-nav-link font-mont text-sm font-semibold rounded-lg px-3 py-2 transition-all",
+                      active
+                        ? "text-white bg-ett-orange/15 border-l-2 border-ett-orange"
+                        : "text-[#9fb2c8] hover:text-white hover:bg-white/6",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
           </motion.div>
         )}

@@ -4,6 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
 /* ---------------- Flag marquee (bandeau drapeaux défilant) ---------------- */
+function flagToTwemoji(flag: string) {
+  const codePoints = [...flag]
+    .map((c) => c.codePointAt(0)?.toString(16))
+    .join("-");
+  return `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/${codePoints}.png`;
+}
+
 export function FlagMarquee({
   title,
   items,
@@ -28,9 +35,12 @@ export function FlagMarquee({
               key={`${item.label}-${i}`}
               className="flex shrink-0 items-center gap-2.5 font-mont text-sm font-semibold text-slate-300"
             >
-              <span className="text-2xl" aria-hidden>
-                {item.flag}
-              </span>
+              <img
+                src={flagToTwemoji(item.flag)}
+                alt={item.label}
+                className="h-5 w-5"
+                loading="lazy"
+              />
               {item.label}
             </span>
           ))}
