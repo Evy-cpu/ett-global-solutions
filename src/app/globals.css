@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-ett-orange: #e94e1b;
+  --color-ett-orangeDark: #cf3f12;
+  --color-ett-blue: #104b9c;
+  --color-ett-navy: #0c2d5a;
+  --color-ett-dark: #0b1422;
+  --color-ett-surface: #0f1d32;
+  --color-ett-surface2: #0a1220;
+
+  --font-mont: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ===== Dark mode (default) ===== */
+.dark {
+  color-scheme: dark;
+  --ett-bg: #0b1422;
+  --ett-bg-alt: #0a1220;
+  --ett-surface: rgba(255, 255, 255, 0.035);
+  --ett-border: rgba(255, 255, 255, 0.08);
+  --ett-border-hover: rgba(233, 78, 27, 0.45);
+  --ett-text: #e2e8f0;
+  --ett-text-muted: #94a3b8;
+  --ett-text-heading: #ffffff;
+  --ett-header-bg: rgba(11, 20, 34, 0.8);
+  --ett-header-border: rgba(255, 255, 255, 0.05);
+  --ett-card-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  --ett-scrollbar-track: #0a1220;
+  --ett-scrollbar-thumb: #1c2c44;
+  --ett-input-bg: rgba(255, 255, 255, 0.045);
+  --ett-input-border: rgba(255, 255, 255, 0.12);
+  --ett-overlay-gradient: linear-gradient(90deg, rgba(8,18,34,.94) 0%, rgba(8,18,34,.72) 45%, rgba(8,18,34,.30) 100%);
+}
+
+/* ===== Light mode ===== */
+.light {
+  color-scheme: light;
+  --ett-bg: #f8fafc;
+  --ett-bg-alt: #f1f5f9;
+  --ett-surface: rgba(255, 255, 255, 0.85);
+  --ett-border: rgba(0, 0, 0, 0.08);
+  --ett-border-hover: rgba(233, 78, 27, 0.5);
+  --ett-text: #1e293b;
+  --ett-text-muted: #64748b;
+  --ett-text-heading: #0f172a;
+  --ett-header-bg: rgba(255, 255, 255, 0.85);
+  --ett-header-border: rgba(0, 0, 0, 0.06);
+  --ett-card-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+  --ett-scrollbar-track: #f1f5f9;
+  --ett-scrollbar-thumb: #cbd5e1;
+  --ett-input-bg: #ffffff;
+  --ett-input-border: rgba(0, 0, 0, 0.12);
+  --ett-overlay-gradient: linear-gradient(90deg, rgba(248,250,252,.94) 0%, rgba(248,250,252,.72) 45%, rgba(248,250,252,.30) 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ett-bg);
+  color: var(--ett-text);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-ett-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-ett-orange);
+  color: #fff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ett-scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ett-scrollbar-thumb);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ett-orange);
+}
+
+@utility font-mont {
+  font-family: var(--font-mont);
+}
+@utility font-inter {
+  font-family: var(--font-inter);
+}
+
+.ett-card {
+  border-radius: 22px;
+  border: 1px solid var(--ett-border);
+  background: var(--ett-surface);
+  backdrop-filter: blur(14px);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+.ett-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ett-card-shadow);
+  border-color: var(--ett-border-hover);
+}
+
+/* Light mode card refinement */
+.light .ett-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes ett-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ett-marquee {
+  display: flex;
+  width: max-content;
+  animation: ett-marquee 32s linear infinite;
+}
+.ett-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ett-wifi-pulse {
+  0% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+.ett-wifi-arc-1 {
+  animation: ett-wifi-pulse 2.2s ease-in-out infinite;
+}
+.ett-wifi-arc-2 {
+  animation: ett-wifi-pulse 2.2s ease-in-out 0.3s infinite;
+}
+.ett-wifi-arc-3 {
+  animation: ett-wifi-pulse 2.2s ease-in-out 0.6s infinite;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-ett-orange);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* ===== Light mode overrides for common patterns ===== */
+
+/* Text: override text-white unless on a colored background (buttons, badges, etc.) */
+.light .text-white:not([class*="bg-ett-orange"]):not([class*="bg-emerald"]):not([class*="bg-\[#0A66C2\]"]):not([class*="bg-black"]):not(.preserve-white) {
+  color: var(--ett-text-heading);
+}
+.light .text-slate-200,
+.light .text-slate-300 {
+  color: var(--ett-text);
+}
+.light .text-slate-400,
+.light .text-slate-500 {
+  color: var(--ett-text-muted);
+}
+
+/* Borders */
+.light .border-white\/5,
+.light .border-white\/\[0\.05\],
+.light .border-white\/\[0\.06\],
+.light .border-white\/\[0\.07\],
+.light .border-white\/\[0\.08\],
+.light .border-white\/10,
+.light .border-white\/15,
+.light .border-white\/20,
+.light .border-white\/25 {
+  border-color: var(--ett-border);
+}
+
+/* Semi-transparent backgrounds */
+.light .bg-white\/\[0\.06\],
+.light .bg-white\/\[0\.045\],
+.light .bg-white\/\[0\.05\],
+.light .bg-white\/\[0\.12\] {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Header in light mode */
+.light .ett-header {
+  background-color: var(--ett-header-bg);
+  border-color: var(--ett-header-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.light .ett-mobile-menu {
+  background-color: rgba(255, 255, 255, 0.96);
+  border-color: var(--ett-border);
+}
+
+/* Footer in light mode */
+.light .ett-footer {
+  background-color: var(--ett-bg-alt);
+  border-color: var(--ett-border);
+}
+
+/* Input fields */
+.light input,
+.light textarea,
+.light select {
+  background-color: var(--ett-input-bg);
+  border-color: var(--ett-input-border);
+  color: var(--ett-text-heading);
+}
+.light input::placeholder,
+.light textarea::placeholder {
+  color: var(--ett-text-muted);
+}
+
+/* Nav text in light */
+.light .ett-nav-link {
+  color: #475569;
+}
+.light .ett-nav-link:hover {
+  color: #0f172a;
+}
+
+/* Surface sections */
+.light .ett-surface-alt {
+  background-color: var(--ett-bg-alt);
+}
+
+/* Image overlay gradients in light mode */
+.light .ett-img-overlay {
+  background: linear-gradient(to top, rgba(241, 245, 249, 0.92), rgba(241, 245, 249, 0.4), transparent) !important;
+}
+.light .ett-img-overlay-icon {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: var(--ett-border);
+}
+.light .ett-gradient-overlay {
+  --tw-gradient-from: rgba(0, 0, 0, 0.4);
+}
+
+/* Background & gradient utilities */
+.light .bg-ett-dark {
+  background-color: var(--ett-bg);
+}
+.light .from-ett-dark {
+  --tw-gradient-from: var(--ett-bg);
+}
+.light .via-ett-dark\/35 {
+  --tw-gradient-via: color-mix(in srgb, var(--ett-bg) 35%, transparent);
+}
+.light .to-ett-dark\/10 {
+  --tw-gradient-to: color-mix(in srgb, var(--ett-bg) 10%, transparent);
+}
+.light .bg-ett-dark\/70 {
+  background-color: color-mix(in srgb, var(--ett-bg) 70%, transparent);
+}
+.light .bg-ett-dark\/80 {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+.light .bg-ett-dark\/85 {
+  background-color: rgba(248, 250, 252, 0.85);
+}
+.light .bg-ett-dark\/90 {
+  background-color: rgba(248, 250, 252, 0.9);
+}
+.light .bg-ett-dark\/98 {
+  background-color: rgba(255, 255, 255, 0.96);
+}
+.light .bg-ett-surface2 {
+  background-color: var(--ett-bg-alt);
+}
+.light .bg-ett-surface2\/50 {
+  background-color: color-mix(in srgb, var(--ett-bg-alt) 50%, transparent);
+}
+.light .bg-ett-surface2\/60 {
+  background-color: color-mix(in srgb, var(--ett-bg-alt) 60%, transparent);
+}
+.light .bg-ett-surface2\/90 {
+  background-color: color-mix(in srgb, var(--ett-bg-alt) 90%, transparent);
+}
+.light .bg-ett-navy\/20 {
+  background-color: rgba(16, 75, 156, 0.05);
+}
+.light .bg-white\/\[0\.03\] {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.light .bg-black\/40 {
+  background-color: rgba(0, 0, 0, 0.06);
+}
